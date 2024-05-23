@@ -11,17 +11,9 @@ import { ThemedView } from '@/components/ThemedView';
 
 const HEADER_HEIGHT = 250;
 
-type Props = PropsWithChildren<{
-  headerImage: ReactElement;
-  headerBackgroundColor: { dark: string; light: string };
-}>;
+type Props = PropsWithChildren<{}>; // verificar se realmente é necessario 
 
-export default function ParallaxScrollView({
-  children,
-  headerImage,
-  headerBackgroundColor,
-}: Props) {
-  const colorScheme = useColorScheme() ?? 'light';
+export default function ParallaxScrollView({children}: Props) { //tentar entender melhor o uso de Props
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
 
@@ -48,11 +40,12 @@ export default function ParallaxScrollView({
         <Animated.View
           style={[
             styles.header,
-            { backgroundColor: headerBackgroundColor[colorScheme] },
             headerAnimatedStyle,
           ]}>
-          {headerImage}
+        <img src='./assets/images/medica-time.png'  />
+        
         </Animated.View>
+        
         <ThemedView style={styles.content}>{children}</ThemedView>
       </Animated.ScrollView>
     </ThemedView>
@@ -64,7 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    height: 50,
+    height: 200,
     overflow: 'hidden',
   },
   content: {
