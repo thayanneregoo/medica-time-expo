@@ -42,7 +42,7 @@ export default function ParallaxScrollView({children}: Props) { //tentar entende
             styles.header,
             headerAnimatedStyle,
           ]}>
-        <img src='./assets/images/medica-time.png'  />
+        <img src='./assets/images/medica-time3.png'  />
         
         </Animated.View>
         
