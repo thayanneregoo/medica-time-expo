@@ -44,13 +44,14 @@ export default function Medicamentos() {
       
             { listaMedicamentos.map((tema:any)=> (
                 <>
+                
                 {console.log(tema.id)}
-                <ThemedView style={styles.titleContainer}>
+                <ThemedView style={styles.titleContainer} key={tema.id}>
                   <Collapsible title={tema.fields.Name}>    
                   <ThemedText type="defaultSemiBold" >Descrição do Medicamento</ThemedText> 
 
                   <ThemedText>{tema.fields.Notes ? tema.fields.Notes:'Ainda não há descrição'}{' '}</ThemedText>
-                  <ThemedText type="defaultSemiBold">Horario :{' '}</ThemedText>             
+                  <ThemedText type="defaultSemiBold">Horarios :{tema.fields.Horario}{' '}</ThemedText>             
                   </Collapsible> 
                 </ThemedView>
            
