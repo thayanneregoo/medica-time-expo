@@ -9,52 +9,55 @@ import { ThemedView } from '@/components/ThemedView';
 import { useEffect, useState } from 'react';
 // import {token} from '@/.env' //veriricar como podemos inportar o token doa rquivo .env
 import { Link } from 'expo-router';
+import { token } from '../service';
 
-export default function TabTwoScreen() {
+export default function Medicamentos() {
 
     const [listaMedicamentos,setListaMedicamentos]= useState([])
-    // useEffect ( 
-    //   ()=>{
-    //      async function consultadados () {
-    //      try {
-    //          const data = await fetch("https://api.airtable.com/v0/appNsRbWKK7L2FuqF/tblVXYRBCvv9iqPDD",{
-    //              method:"GET",
-    //              headers:{
-    //                  "Authorization": `Bearer ${token}`, 
-    //                  "Content-Type": "application/json"
-    //              }
-    //          })
+    useEffect ( 
+      ()=>{
+         async function consultadados () {
+         try {
+             const data = await fetch("https://api.airtable.com/v0/appNsRbWKK7L2FuqF/tblVXYRBCvv9iqPDD",{
+                 method:"GET",
+                 headers:{
+                     "Authorization": `Bearer ${token}`, 
+                     "Content-Type": "application/json"
+                 }
+             })
             
-    //          const result = await data.json();
-    //          setListaMedicamentos(result.records)
-    //          console.log(result.records)
+             const result = await data.json();
+             setListaMedicamentos(result.records)
+             console.log(result.records)
         
-    //      } catch (error) {
-    //          console.log(error)
-    //      }}
-    //       consultadados()
-    //  },[])
+         } catch (error) {
+             console.log(error)
+         }}
+          consultadados()
+     },[])
 
   return (
     <ParallaxScrollView>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Medicamentos</ThemedText>
+        <ThemedText type="title">Meus Medicamentos</ThemedText>
       </ThemedView>
-      <ThemedView>
-            {/* { listaMedicamentos.map((tema:any)=> (
+      
+            { listaMedicamentos.map((tema:any)=> (
                 <>
                 {console.log(tema.id)}
-                <Link href={`nivelamento/${tema.id}`}>
-                <div className="flex">
-                <Image src={tema.fields.Imagens[0].url}
-                    height={100} width={100} alt={tema.fields.Name}/>
-                <ThemedText>{tema.fields.Name}</ThemedText>  
-                </div>
-                </Link>                 
-                </>     
-            )) } */}
+                <ThemedView style={styles.titleContainer}>
+                  <Collapsible title={tema.fields.Name}>    
+                  <ThemedText type="defaultSemiBold" >Descrição do Medicamento</ThemedText> 
 
-      </ThemedView>
+                  <ThemedText>{tema.fields.Notes ? tema.fields.Notes:'Ainda não há descrição'}{' '}</ThemedText>
+                  <ThemedText type="defaultSemiBold">Horario :{' '}</ThemedText>             
+                  </Collapsible> 
+                </ThemedView>
+           
+                </>     
+            )) }
+
+      
     </ParallaxScrollView>
   );
 }
