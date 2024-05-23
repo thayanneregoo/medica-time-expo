@@ -7,33 +7,33 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useEffect, useState } from 'react';
-import {token} from '@/app/service'
+// import {token} from '@/.env' //veriricar como podemos inportar o token doa rquivo .env
 import { Link } from 'expo-router';
 
 export default function TabTwoScreen() {
 
     const [listaMedicamentos,setListaMedicamentos]= useState([])
-    useEffect ( 
-      ()=>{
-         async function consultadados () {
-         try {
-             const data = await fetch("https://api.airtable.com/v0/appNsRbWKK7L2FuqF/tblVXYRBCvv9iqPDD",{
-                 method:"GET",
-                 headers:{
-                     "Authorization": `Bearer ${token}`, 
-                     "Content-Type": "application/json"
-                 }
-             })
+    // useEffect ( 
+    //   ()=>{
+    //      async function consultadados () {
+    //      try {
+    //          const data = await fetch("https://api.airtable.com/v0/appNsRbWKK7L2FuqF/tblVXYRBCvv9iqPDD",{
+    //              method:"GET",
+    //              headers:{
+    //                  "Authorization": `Bearer ${token}`, 
+    //                  "Content-Type": "application/json"
+    //              }
+    //          })
             
-             const result = await data.json();
-             setListaMedicamentos(result.records)
-             console.log(result.records)
+    //          const result = await data.json();
+    //          setListaMedicamentos(result.records)
+    //          console.log(result.records)
         
-         } catch (error) {
-             console.log(error)
-         }}
-          consultadados()
-     },[])
+    //      } catch (error) {
+    //          console.log(error)
+    //      }}
+    //       consultadados()
+    //  },[])
 
   return (
     <ParallaxScrollView>
@@ -41,7 +41,7 @@ export default function TabTwoScreen() {
         <ThemedText type="title">Medicamentos</ThemedText>
       </ThemedView>
       <ThemedView>
-            { listaMedicamentos.map((tema:any)=> (
+            {/* { listaMedicamentos.map((tema:any)=> (
                 <>
                 {console.log(tema.id)}
                 <Link href={`nivelamento/${tema.id}`}>
@@ -52,7 +52,7 @@ export default function TabTwoScreen() {
                 </div>
                 </Link>                 
                 </>     
-            )) }
+            )) } */}
 
       </ThemedView>
     </ParallaxScrollView>

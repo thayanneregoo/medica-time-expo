@@ -42,7 +42,7 @@ export default function ParallaxScrollView({children}: Props) { //tentar entende
             styles.header,
             headerAnimatedStyle,
           ]}>
-        <img src='./assets/images/medica-time3.png'  />
+        <img src='./assets/images/medica-time3.png' height={100} />
         
         </Animated.View>
         
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    height: 200,
+    height: 100,
     overflow: 'hidden',
   },
   content: {
