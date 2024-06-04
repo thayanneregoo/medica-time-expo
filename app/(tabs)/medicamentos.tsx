@@ -51,7 +51,8 @@ export default function Medicamentos() {
                   <ThemedText type="defaultSemiBold" >Descrição do Medicamento</ThemedText> 
 
                   <ThemedText>{tema.fields.Notes ? tema.fields.Notes:'Ainda não há descrição'}{' '}</ThemedText>
-                  <ThemedText type="defaultSemiBold">Horarios :{tema.fields.Horario}{' '}</ThemedText>             
+                  <ThemedText type="defaultSemiBold">Horarios :{tema.fields.Horario}{' '}</ThemedText>   
+                  <ThemedText type="defaultSemiBold">Quantidade por horario :{tema.fields.Quantidade}{' '}</ThemedText>              
                   </Collapsible> 
                 </ThemedView>
            
