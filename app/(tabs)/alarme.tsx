@@ -37,7 +37,7 @@ export default function TabTwoScreen() {
     const medicamentos = Object.entries(medicamento);
   
     // Mapear a matriz de pares para uma nova matriz de strings com o índice
-    return medicamentos.map(([key, value], index) => `${value} -   `);
+    return medicamentos.map(([key, value], index) => `${value} `);
   };
 
   return (
@@ -48,8 +48,6 @@ export default function TabTwoScreen() {
     
           { horarios.map((tema:any,index)=> (
               <>
-              
-              {console.log(tema.id)}
               <ThemedView style={styles.titleContainer} key={index}>
                 <Collapsible title={tema.fields.Name}>    
                 <ThemedText type="defaultSemiBold">Medicamentos :{mapeamento(tema.fields.Medicamentos)}{' '}</ThemedText>             
