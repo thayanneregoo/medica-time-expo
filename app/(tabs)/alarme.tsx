@@ -38,11 +38,11 @@ export default function TabTwoScreen() {
       <ThemedText type="title">Alarmes</ThemedText>
     </ThemedView>
     
-          { horarios.map((tema:any)=> (
+          { horarios.map((tema:any,index)=> (
               <>
               
               {console.log(tema.id)}
-              <ThemedView style={styles.titleContainer} key={tema.id}>
+              <ThemedView style={styles.titleContainer} key={index}>
                 <Collapsible title={tema.fields.Name}>    
                 <ThemedText type="defaultSemiBold">Medicamentos :{tema.fields.Medicamentos}{' '}</ThemedText>             
                 </Collapsible> 

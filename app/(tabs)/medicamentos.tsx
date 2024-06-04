@@ -42,11 +42,11 @@ export default function Medicamentos() {
         <ThemedText type="title">Meus Medicamentos</ThemedText>
       </ThemedView>
       
-            { listaMedicamentos.map((tema:any)=> (
+            { listaMedicamentos.map((tema:any,index)=> (
                 <>
                 
                 {console.log(tema.id)}
-                <ThemedView style={styles.titleContainer} key={tema.id}>
+                <ThemedView style={styles.titleContainer} key={index}>
                   <Collapsible title={tema.fields.Name}>    
                   <ThemedText type="defaultSemiBold" >Descrição do Medicamento</ThemedText> 
 

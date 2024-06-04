@@ -23,7 +23,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="calendario"
         options={{
           title: 'Calendario',
@@ -31,7 +31,7 @@ export default function TabLayout() {
             <TabBarIcon name={focused ? 'calendar' : 'calendar-outline'} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="alarme"
         options={{
