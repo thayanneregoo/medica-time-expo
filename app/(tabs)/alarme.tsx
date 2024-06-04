@@ -32,6 +32,14 @@ export default function TabTwoScreen() {
        consultadados()
   },)
 
+  const mapeamento = (medicamento:object) => {
+    // Converter o objeto em uma matriz de pares [key, value]
+    const medicamentos = Object.entries(medicamento);
+  
+    // Mapear a matriz de pares para uma nova matriz de strings com o índice
+    return medicamentos.map(([key, value], index) => `${value} -   `);
+  };
+
   return (
     <ParallaxScrollView>
     <ThemedView style={styles.titleContainer}>
@@ -44,7 +52,7 @@ export default function TabTwoScreen() {
               {console.log(tema.id)}
               <ThemedView style={styles.titleContainer} key={index}>
                 <Collapsible title={tema.fields.Name}>    
-                <ThemedText type="defaultSemiBold">Medicamentos :{tema.fields.Medicamentos}{' '}</ThemedText>             
+                <ThemedText type="defaultSemiBold">Medicamentos :{mapeamento(tema.fields.Medicamentos)}{' '}</ThemedText>             
                 </Collapsible> 
               </ThemedView>
          
