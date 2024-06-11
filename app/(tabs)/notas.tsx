@@ -25,9 +25,7 @@ export default function TabTwoScreen() {
                 }
             })
             const result = await data.json();
-            setHorarios(result.records)
-            console.log(result.records)
-       
+            setHorarios(result.records)       
         } catch (error) {
             console.log(error)
         }}

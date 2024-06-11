@@ -20,9 +20,8 @@ interface AddButtonProps {
 return(
     <>
     <TouchableOpacity style={styles.button}  onPress={onPress} >
-<Text style={styles.buttonText}>Adicionar {formaPathName(pathname)}  
+<Text style={styles.buttonText}>Adicionar {formaPathName(pathname)}  </Text>
 <TabBarIcon name={'add'} style={styles.icon}/>
-</Text>
 
 </TouchableOpacity> 
 </>
@@ -39,12 +38,14 @@ const styles = StyleSheet.create({
       fontSize: 16,
       alignItems: 'center',
       justifyContent: 'center',
+      flexDirection:'row',
       elevation: 20,
       shadowOpacity:20,
-      shadowColor: '#ccc'
+      shadowColor: '#ccc',
+      color:'white'
     },
     buttonText: {
-      color: '#fff',
+      color: 'white',
       fontWeight: 'bold',
       display:'flex',
       alignItems:'center',
@@ -53,7 +54,8 @@ const styles = StyleSheet.create({
     icon:{
       opacity:0.7,
       borderRadius:20,
-      paddingLeft:2
+      paddingLeft:2,
+      color:'white'
     }
   });
   
