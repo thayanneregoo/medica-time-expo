@@ -42,11 +42,11 @@ export default function TabTwoScreen() {
                 <>
                 <ThemedView style={styles.titleContainer} key={tema.id}>
                   <Collapsible title={tema.fields.Title}>    
-                  <ThemedText type="defaultSemiBold">Hgt: {tema.fields.HGT}{' '}</ThemedText>   
-                  <ThemedText type="defaultSemiBold">Pressão Arterial: {tema.fields.PA}{' '}</ThemedText>             
-                  <ThemedText type="defaultSemiBold">Data: {formatDatetime(tema.fields.Horario)}{' '}</ThemedText>
-                  <ThemedText type="defaultSemiBold">Jejum: {tema.fields.Jejum}{' '}</ThemedText>           
-                  <ThemedText type="defaultSemiBold">Observações: {tema.fields.Obs}{' '}</ThemedText>             
+                  <ThemedText >Hgt: {tema.fields.HGT}{' '}</ThemedText>   
+                  <ThemedText >Pressão Arterial: {tema.fields.PA}{' '}</ThemedText>             
+                  <ThemedText >Data: {formatDatetime(tema.fields.Horario)}{' '}</ThemedText>
+                  <ThemedText >Jejum: {tema.fields.Jejum}{' '}</ThemedText>           
+                  <ThemedText >Observações: {tema.fields.Obs}{' '}</ThemedText>             
   
              
 
