@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Button, TouchableOpacity, Text } from 'react-native';
 
 import { Collapsible } from '@/components/Collapsible';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -7,6 +7,9 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState } from 'react';
 import { token } from '../service';
+import { TabBarIcon } from '@/components/navigation/TabBarIcon';
+import {AddButton} from '@/components/AddButton';
+import { usePathname } from 'expo-router';
 
 
 export default function TabTwoScreen() {
@@ -23,9 +26,7 @@ export default function TabTwoScreen() {
               }
           })
           const result = await data.json();
-          setHorarios(result.records)
-          console.log(result.records)
-     
+          setHorarios(result.records)     
       } catch (error) {
           console.log(error)
       }}
@@ -59,8 +60,10 @@ export default function TabTwoScreen() {
          
               </>     
           )) }
+    <AddButton onPress={function (): void {
+        throw new Error('Function not implemented.');
+      } }/>
 
-    
   </ParallaxScrollView>
   );
 }
@@ -76,4 +79,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 8,
   },
+  button:{
+    marginTop:10,
+    height: 60,
+    backgroundColor: '#24a9ac',
+    borderRadius: 10,
+    paddingHorizontal: 24,
+    fontSize: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 20,
+    shadowOpacity:20,
+    shadowColor: '#ccc'
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'space-between'
+  },
+  icon:{
+    opacity:0.7,
+    borderRadius:20,
+    paddingLeft:2
+  }
 });

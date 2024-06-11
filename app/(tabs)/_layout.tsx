@@ -44,7 +44,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="medicamentos"
         options={{
-          title: 'medicamentos',
+          title: 'Medicamentos',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'medkit' : 'medkit-outline'} color={color} />
           ),

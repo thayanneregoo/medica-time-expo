@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 // import {token} from '@/.env' //veriricar como podemos inportar o token doa rquivo .env
 import { Link } from 'expo-router';
 import { token } from '../service';
+import { AddButton } from '@/components/AddButton';
 
 export default function Medicamentos() {
 
@@ -28,7 +29,6 @@ export default function Medicamentos() {
             
              const result = await data.json();
              setListaMedicamentos(result.records)
-             console.log(result.records)
         
          } catch (error) {
              console.log(error)
@@ -51,8 +51,6 @@ export default function Medicamentos() {
       
             { listaMedicamentos.map((tema:any,index)=> (
                 <>
-                
-                {console.log(tema.id)}
                 <ThemedView style={styles.titleContainer} key={index}>
                   <Collapsible title={tema.fields.Name}>    
                   <ThemedText type="defaultSemiBold" >Descrição do Medicamento</ThemedText> 
@@ -62,7 +60,7 @@ export default function Medicamentos() {
                   <ThemedText type="defaultSemiBold">Quantidade por horario :{tema.fields.Quantidade}{' '}</ThemedText>              
                   </Collapsible> 
                 </ThemedView>
-           
+                <AddButton/>
                 </>     
             )) }
 

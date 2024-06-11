@@ -9,6 +9,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { token } from '../service';
 import { useState } from 'react';
 import { formatDatetime } from '@/components/helper/formatdata';
+import { AddButton } from '@/components/AddButton';
 
 export default function TabTwoScreen() {
     const [horarios,setHorarios] = useState([])
@@ -41,8 +42,6 @@ export default function TabTwoScreen() {
       
             { horarios.map((tema:any)=> (
                 <>
-                
-                {console.log(tema.id)}
                 <ThemedView style={styles.titleContainer} key={tema.id}>
                   <Collapsible title={tema.fields.Title}>    
                   <ThemedText type="defaultSemiBold">Hgt: {tema.fields.HGT}{' '}</ThemedText>   
@@ -58,6 +57,9 @@ export default function TabTwoScreen() {
            
                 </>     
             )) }
+
+<AddButton/>
+
   
       
     </ParallaxScrollView>

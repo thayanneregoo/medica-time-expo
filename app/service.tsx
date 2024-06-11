@@ -1,1 +1,1 @@
-export const token = "patrkoyMajy2xr60P.7111465d49922a30fc37c2a60494ba40563cf68f08ed94526dd99ad6dcd58f09"
+export const token = process.env.EXPO_PUBLIC_KEY
