@@ -60,11 +60,9 @@ export default function Medicamentos() {
                   <ThemedText type="defaultSemiBold">Quantidade por horario :{tema.fields.Quantidade}{' '}</ThemedText>              
                   </Collapsible> 
                 </ThemedView>
-                <AddButton/>
                 </>     
             )) }
-
-      
+      <AddButton/>
     </ParallaxScrollView>
   );
 }

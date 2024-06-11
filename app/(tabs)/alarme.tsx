@@ -60,9 +60,7 @@ export default function TabTwoScreen() {
          
               </>     
           )) }
-    <AddButton onPress={function (): void {
-        throw new Error('Function not implemented.');
-      } }/>
+    <AddButton />
 
   </ParallaxScrollView>
   );

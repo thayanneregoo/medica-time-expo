@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       display:'flex',
       alignItems:'center',
-      justifyContent:'space-between'
+      justifyContent:'center'
     },
     icon:{
       opacity:0.7,
