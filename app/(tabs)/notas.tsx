@@ -8,6 +8,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { token } from '../service';
 import { useState } from 'react';
+import { formatDatetime } from '@/components/helper/formatdata';
 
 export default function TabTwoScreen() {
     const [horarios,setHorarios] = useState([])
@@ -44,11 +45,11 @@ export default function TabTwoScreen() {
                 {console.log(tema.id)}
                 <ThemedView style={styles.titleContainer} key={tema.id}>
                   <Collapsible title={tema.fields.Title}>    
-                  <ThemedText type="defaultSemiBold">Hgt :{tema.fields.HGT}{' '}</ThemedText>   
-                  <ThemedText type="defaultSemiBold">Pressão Arterial: :{tema.fields.PA}{' '}</ThemedText>             
-                  <ThemedText type="defaultSemiBold">Data :{tema.fields.Horario}{' '}</ThemedText>
-                  <ThemedText type="defaultSemiBold">Jejum :{tema.fields.Jejum}{' '}</ThemedText>           
-                  <ThemedText type="defaultSemiBold">Observações :{tema.fields.Obs}{' '}</ThemedText>             
+                  <ThemedText type="defaultSemiBold">Hgt: {tema.fields.HGT}{' '}</ThemedText>   
+                  <ThemedText type="defaultSemiBold">Pressão Arterial: {tema.fields.PA}{' '}</ThemedText>             
+                  <ThemedText type="defaultSemiBold">Data: {formatDatetime(tema.fields.Horario)}{' '}</ThemedText>
+                  <ThemedText type="defaultSemiBold">Jejum: {tema.fields.Jejum}{' '}</ThemedText>           
+                  <ThemedText type="defaultSemiBold">Observações: {tema.fields.Obs}{' '}</ThemedText>             
   
              
 

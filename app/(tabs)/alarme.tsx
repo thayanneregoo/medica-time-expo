@@ -32,12 +32,14 @@ export default function TabTwoScreen() {
        consultadados()
   },)
 
-  const mapeamento = (medicamento:object) => {
+  const mapeamento = (medicamento:object, quantidade:string[]) => {
     // Converter o objeto em uma matriz de pares [key, value]
     const medicamentos = Object.entries(medicamento);
-  
+    let list: string[] = []
+    medicamentos.map(([key, value], index) => list.push(` ${quantidade[index]} - ${value}`))
+
     // Mapear a matriz de pares para uma nova matriz de strings com o índice
-    return medicamentos.map(([key, value], index) => `${value} `);
+    return list
   };
 
   return (
@@ -50,7 +52,8 @@ export default function TabTwoScreen() {
               <>
               <ThemedView style={styles.titleContainer} key={index}>
                 <Collapsible title={tema.fields.Name}>    
-                <ThemedText type="defaultSemiBold">Medicamentos :{mapeamento(tema.fields.Medicamentos)}{' '}</ThemedText>             
+                <ThemedText type="defaultSemiBold">Medicamentos: {' '}</ThemedText>  
+                <ThemedText>{mapeamento(tema.fields.Medicamentos, tema.fields.Quantidade).map((x:any)=> `${x} \n` )}</ThemedText>           
                 </Collapsible> 
               </ThemedView>
          
