@@ -35,6 +35,13 @@ export default function Medicamentos() {
          }}
           consultadados()
      },[])
+     const mapeamento = (medicamento:object) => {
+      // Converter o objeto em uma matriz de pares [key, value]
+      const medicamentos = Object.entries(medicamento);
+    
+      // Mapear a matriz de pares para uma nova matriz de strings com o índice
+      return medicamentos.map(([key, value], index) => `${value} `);
+    }
 
   return (
     <ParallaxScrollView>
@@ -51,7 +58,7 @@ export default function Medicamentos() {
                   <ThemedText type="defaultSemiBold" >Descrição do Medicamento</ThemedText> 
 
                   <ThemedText>{tema.fields.Notes ? tema.fields.Notes:'Ainda não há descrição'}{' '}</ThemedText>
-                  <ThemedText type="defaultSemiBold">Horarios :{tema.fields.Horario}{' '}</ThemedText>   
+                  <ThemedText type="defaultSemiBold">Horarios: {mapeamento(tema.fields.Horario)}{' '}</ThemedText>   
                   <ThemedText type="defaultSemiBold">Quantidade por horario :{tema.fields.Quantidade}{' '}</ThemedText>              
                   </Collapsible> 
                 </ThemedView>

@@ -35,7 +35,7 @@ export default function TabTwoScreen() {
     return (
       <ParallaxScrollView>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Alarmes</ThemedText>
+        <ThemedText type="title">Anotações</ThemedText>
       </ThemedView>
       
             { horarios.map((tema:any)=> (
