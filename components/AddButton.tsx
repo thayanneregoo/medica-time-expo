@@ -4,7 +4,7 @@ import { usePathname } from "expo-router";
 
 interface AddButtonProps {
     // text?: string;
-    onPress?: () => void;
+    onPress?: () => void; //aqui deve ser adicionado uma função que abre a modal
   }  
 
   

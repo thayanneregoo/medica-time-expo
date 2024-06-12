@@ -6,31 +6,25 @@ import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { token } from '../service';
-import { useState } from 'react';
+import { consultadados, token } from '../service';
+import { useEffect, useState } from 'react';
 import { formatDatetime } from '@/components/helper/formatdata';
 import { AddButton } from '@/components/AddButton';
 
 export default function TabTwoScreen() {
-    const [horarios,setHorarios] = useState([])
-    useState(
+    const [notas,setNotas] = useState([])
+    useEffect ( 
       ()=>{
-      async function consultadados () {
-        try {
-            const data = await fetch("https://api.airtable.com/v0/appNsRbWKK7L2FuqF/tblUn0hycSWAXNaQ7",{
-                method:"GET",
-                headers:{
-                    "Authorization": `Bearer ${token}`, 
-                    "Content-Type": "application/json"
-                }
-            })
-            const result = await data.json();
-            setHorarios(result.records)       
-        } catch (error) {
-            console.log(error)
-        }}
-         consultadados()
-    },)
+        const fetchDados = async () => {
+          try {
+            const data = await consultadados('Medicamentos/');
+            setNotas(data);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+       fetchDados()
+    },[])
   
     return (
       <ParallaxScrollView>
@@ -38,7 +32,7 @@ export default function TabTwoScreen() {
         <ThemedText type="title">Anotações</ThemedText>
       </ThemedView>
       
-            { horarios.map((tema:any)=> (
+            { notas.map((tema:any)=> (
                 <>
                 <ThemedView style={styles.titleContainer} key={tema.id}>
                   <Collapsible title={tema.fields.Title}>    

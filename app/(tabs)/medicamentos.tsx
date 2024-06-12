@@ -9,31 +9,18 @@ import { ThemedView } from '@/components/ThemedView';
 import { useEffect, useState } from 'react';
 // import {token} from '@/.env' //veriricar como podemos inportar o token doa rquivo .env
 import { Link } from 'expo-router';
-import { token } from '../service';
+import { consultadados, token } from '../service';
 import { AddButton } from '@/components/AddButton';
 
 export default function Medicamentos() {
 
     const [listaMedicamentos,setListaMedicamentos]= useState([])
     useEffect ( 
-      ()=>{
-         async function consultadados () {
-         try {
-             const data = await fetch("https://api.airtable.com/v0/appNsRbWKK7L2FuqF/tblVXYRBCvv9iqPDD",{
-                 method:"GET",
-                 headers:{
-                     "Authorization": `Bearer ${token}`, 
-                     "Content-Type": "application/json"
-                 }
-             })
-            
-             const result = await data.json();
-             setListaMedicamentos(result.records)
-        
-         } catch (error) {
-             console.log(error)
-         }}
-          consultadados()
+       ()=>{
+        const fetchDados = async ()=>{
+          setListaMedicamentos(await consultadados('Medicamentos/'))
+        }
+        fetchDados()
      },[])
      const mapeamento = (medicamento:object) => {
       // Converter o objeto em uma matriz de pares [key, value]
