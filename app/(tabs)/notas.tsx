@@ -50,7 +50,7 @@ export default function TabTwoScreen() {
                 </>     
             )) }
 
-<AddButton text='Adicionar anotações'/>
+<AddButton text='Adicionar Anotação'/>
 
   
       

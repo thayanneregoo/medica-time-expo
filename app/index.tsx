@@ -38,9 +38,10 @@ const LoginScreen = () => {
           value={password}
           onChangeText={setPassword}
         />
-        <AddButton text='Login' onPress={handleLogin} icon='none'/>
 
       </ThemedView>
+      <AddButton text='Login' onPress={handleLogin} icon='none'/>
+
 
     </ParallaxScrollView>
   );
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   input: {
-    width: '80%',
+    width: '100%',
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
@@ -65,7 +66,9 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     gap: 8,
-  },button:{width:60},title:{paddingBottom:20}
+  }
+  ,title:
+  {paddingBottom:20}
 });
 
 export default LoginScreen;

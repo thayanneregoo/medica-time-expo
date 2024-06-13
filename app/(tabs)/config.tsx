@@ -26,32 +26,31 @@ export default function TabTwoScreen() {
         <ParallaxScrollView>
             <ThemedView style={styles.titleContainer}>
                 <ThemedText type="title" style={styles.title}>Configurações</ThemedText>
-                <FontAwesome6 name="gear" size={24} color="black" />
+                <FontAwesome6 name="gear" size={24} style={styles.icon} />
             </ThemedView>
             <ThemedView style={styles.tag}>
                 <FontAwesome6 name="user-gear" size={24} style={styles.icon} />
                 <ThemedText type="subtitle" style={styles.title}>Perfil</ThemedText>
             </ThemedView>
             <ThemedView style={styles.tag}>
-            <MaterialCommunityIcons name="email-edit" size={24} style={styles.icon} />
-            <ThemedText type="subtitle" style={styles.title}>Conta</ThemedText>
+                <MaterialCommunityIcons name="email-edit" size={24} style={styles.icon} />
+                <ThemedText type="subtitle" style={styles.title}>Conta</ThemedText>
             </ThemedView>
             <ThemedView style={styles.tag}>
-            <Entypo name="sound-mix" size={24} color="black" />                
-            <ThemedText type="subtitle" style={styles.title}>Definições</ThemedText>
+                <Entypo name="sound-mix" size={24} style={styles.icon} />
+                <ThemedText type="subtitle" style={styles.title}>Definições</ThemedText>
             </ThemedView>
             <ThemedView style={styles.tag}>
-                <FontAwesome6 name="user-gear" size={24} style={styles.icon} />
+                <Entypo name="help-with-circle" size={24} style={styles.icon} />                
                 <ThemedText type="subtitle" style={styles.title}>Ajuda</ThemedText>
             </ThemedView>
-            <ThemedView style={styles.tag}>
-                <FontAwesome6 name="user-gear" size={24} style={styles.icon} />
+            <ThemedView style={styles.tag}><MaterialCommunityIcons name="map-marker-radius" size={24} style={styles.icon} />
                 <ThemedText type="subtitle" style={styles.title}>Localizar Farmacias</ThemedText>
             </ThemedView>
             <ThemedView style={styles.tag}>
                 <Link href={'/'}>
 
-                    <FontAwesome6 name="user-gear" size={24} style={styles.icon} />
+                <MaterialCommunityIcons name="exit-to-app" size={24} style={styles.icon} />
                     <ThemedText type="subtitle" style={styles.title}>Sair</ThemedText> </Link>
             </ThemedView>
 
