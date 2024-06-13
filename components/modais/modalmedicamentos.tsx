@@ -1,6 +1,9 @@
-// components/StaticQuestionnaireModal.tsx
 import React, { useState } from 'react';
-import { Modal, View, Text, TextInput, Button, StyleSheet, ScrollView, Switch } from 'react-native';
+import { Modal, View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { ThemedText } from '../ThemedText';
+import MultiPicker from './multiplaescolha'; // Supondo que MultiPicker seja implementado corretamente
+
+const options = ['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4'];
 
 interface StaticQuestionnaireModalProps {
   onClose: () => void;
@@ -9,20 +12,33 @@ interface StaticQuestionnaireModalProps {
 
 const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onClose, visible }) => {
   const [answers, setAnswers] = useState<{ [key: string]: any }>({});
-  const [horarioOptions, setHorarioOptions] = useState<string[]>([
-    'Manhã',
-    'Tarde',
-    'Noite',
-    'Madrugada',
-  ]);
-  const [selectedHorarios, setSelectedHorarios] = useState<{ [key: string]: boolean }>({});
+  const [selectedHorarios, setSelectedHorarios] = useState<string[]>([]);
+  const [isMultiPickerVisible, setMultiPickerVisible] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [frequency, setFrequency] = useState(1);
+
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const incrementFrequency = () => {
+    setFrequency(frequency + 1);
+  };
+
+  const decrementFrequency = () => {
+    if (frequency > 1) {
+      setFrequency(frequency - 1);
+    }
+  };
 
   const handleInputChange = (id: string, value: string) => {
     setAnswers({ ...answers, [id]: value });
-  };
-
-  const handleHorarioChange = (option: string) => {
-    setSelectedHorarios({ ...selectedHorarios, [option]: !selectedHorarios[option] });
   };
 
   const generateHorarioId = (horarios: string[]) => {
@@ -30,17 +46,14 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
   };
 
   const handleSubmit = () => {
-    const selectedHorarioList = Object.keys(selectedHorarios).filter(
-      (key) => selectedHorarios[key]
-    );
-
     const result = {
       fields: {
-        'horario id': generateHorarioId(selectedHorarioList),
-        'Quantidade': Number(answers['quantidade']),
+        'horario id': generateHorarioId(selectedHorarios),
+        'Quantidade': quantity,
+        'Frequência': frequency,
         'Notes': answers['notes'],
         'Name': answers['name'],
-        'Horario': selectedHorarioList,
+        'Horario': selectedHorarios,
       },
     };
 
@@ -57,21 +70,25 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
     >
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
-          <Text style={styles.title}>Questionário</Text>
+          <View style={styles.header}>
+            <ThemedText style={styles.title}>Adicionar Medicamento</ThemedText>
+            <TouchableOpacity style={styles.buttonClose} onPress={onClose}>
+              <ThemedText style={styles.textClose}>X</ThemedText>
+            </TouchableOpacity>
+          </View>
+
           <ScrollView>
             <View>
-              <Text style={styles.label}>Quantidade</Text>
+              <Text style={styles.label}>Medicamento: </Text>
               <TextInput
                 style={styles.input}
-                placeholder="Digite a quantidade"
-                keyboardType="numeric"
-                value={answers['quantidade'] || ''}
-                onChangeText={(text) => handleInputChange('quantidade', text)}
+                placeholder="Digite o nome do Medicamento"
+                value={answers['name'] || ''}
+                onChangeText={(text) => handleInputChange('name', text)}
               />
             </View>
-
             <View>
-              <Text style={styles.label}>Notes</Text>
+              <Text style={styles.label}>Descrição</Text>
               <TextInput
                 style={styles.input}
                 placeholder="Digite suas anotações"
@@ -79,35 +96,71 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
                 onChangeText={(text) => handleInputChange('notes', text)}
               />
             </View>
-
-            <View>
-              <Text style={styles.label}>Name</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Digite o nome"
-                value={answers['name'] || ''}
-                onChangeText={(text) => handleInputChange('name', text)}
-              />
+            <View >
+              <Text style={styles.label}>Quantidade:</Text>
+              <View style={styles.inputContainer}>
+                <TouchableOpacity style={styles.button} onPress={decrementQuantity}>
+                  <Text style={styles.buttonText}>-</Text>
+                </TouchableOpacity>
+                <TextInput
+                  style={styles.inputNumber}
+                  value={quantity.toString()}
+                  keyboardType="numeric"
+                  onChangeText={(text) => {
+                    const numericValue = parseInt(text);
+                    if (!isNaN(numericValue)) {
+                      setQuantity(numericValue);
+                    }
+                  }}
+                />
+                <TouchableOpacity style={styles.button} onPress={incrementQuantity}>
+                  <Text style={styles.buttonText}>+</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View >
+              <Text style={styles.label}>Frequência:</Text>
+              <View style={styles.inputContainer}>
+                <TouchableOpacity style={styles.button} onPress={decrementFrequency}>
+                  <Text style={styles.buttonText}>-</Text>
+                </TouchableOpacity>
+                <TextInput
+                  style={styles.inputNumber}
+                  value={frequency.toString()}
+                  keyboardType="numeric"
+                  onChangeText={(text) => {
+                    const numericValue = parseInt(text);
+                    if (!isNaN(numericValue)) {
+                      setFrequency(numericValue);
+                    }
+                  }}
+                />
+                <TouchableOpacity style={styles.button} onPress={incrementFrequency}>
+                  <Text style={styles.buttonText}>+</Text>
+                </TouchableOpacity>
+              </View>
             </View>
 
             <View>
-              <Text style={styles.label}>Horário</Text>
-              {horarioOptions.map((option) => (
-                <View key={option} style={styles.switchContainer}>
-                  <Text>{option}</Text>
-                  <Switch
-                    trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={selectedHorarios[option] ? "#f5dd4b" : "#f4f3f4"}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={() => handleHorarioChange(option)}
-                    value={selectedHorarios[option]}
-                  />
-                </View>
-              ))}
+              <Text style={styles.label}>Alarmes:</Text>
+              <TouchableOpacity style={styles.input} onPress={() => setMultiPickerVisible(true)}>
+                <Text style={styles.dropdownText}>Selecione os horários dos alarmes</Text>
+              </TouchableOpacity>
+              <MultiPicker
+                options={options}
+                selectedOptions={selectedHorarios}
+                setSelectedOptions={setSelectedHorarios}
+                visible={isMultiPickerVisible}
+                onClose={() => setMultiPickerVisible(false)}
+              />
+              <View >
+                {selectedHorarios.length > 0 && (
+                  <Text>Horários selecionados: {selectedHorarios.join(', ')}</Text>
+                )}
+              </View>
             </View>
           </ScrollView>
           <Button title="Submit" onPress={handleSubmit} />
-          <Button title="Close" onPress={onClose} />
         </View>
       </View>
     </Modal>
@@ -126,7 +179,27 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'white',
     borderRadius: 10,
-    maxHeight: '80%',
+    maxHeight: '90%',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+  },
+  buttonClose: {
+    height: '80%',
+    padding: 5,
+    paddingHorizontal: 10,
+    paddingBottom: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: '#00595f',
+  },
+  textClose: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'white',
   },
   title: {
     marginBottom: 20,
@@ -148,12 +221,54 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginBottom: 20,
   },
-  switchContainer: {
+  
+  
+  inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 10,
+    width: '100%',
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingLeft: 10,
+    marginBottom: 20,
   },
+  inputNumber: {
+    flex: 1,
+    height: 40,
+    fontSize: 16,
+    textAlign: 'center',
+    borderColor: 'gray',
+  },
+  button: {
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  dropdownText: {
+    height: "100%",
+    width: "100%",
+    color: 'black',
+   
+    alignContent: 'center',
+    opacity: 0.7,
+    padding: 10,
+  },
+  dropdownContainer:{
+    width: '100%',
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingLeft: 10,
+    marginBottom: 20,
+    backgroundColor: '#80808036',
+  }
 });
 
 export default StaticQuestionnaireModal;
