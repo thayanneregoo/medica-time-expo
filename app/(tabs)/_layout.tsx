@@ -5,6 +5,8 @@ import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
+
+
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
@@ -64,7 +66,8 @@ export default function TabLayout() {
         options={{
           title: 'Configurações',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'add' : 'add-outline'} color={color} />
+            <TabBarIcon name={focused ? 'settings' : 'settings-outline'} color={color} />
+            
           ),
         }}
       />

@@ -72,39 +72,10 @@ export default function TabTwoScreen() {
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
+
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
   },
-  button:{
-    marginTop:10,
-    height: 60,
-    backgroundColor: '#24a9ac',
-    borderRadius: 10,
-    paddingHorizontal: 24,
-    fontSize: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 20,
-    shadowOpacity:20,
-    shadowColor: '#ccc'
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    display:'flex',
-    alignItems:'center',
-    justifyContent:'space-between'
-  },
-  icon:{
-    opacity:0.7,
-    borderRadius:20,
-    paddingLeft:2
-  }
+  
 });
