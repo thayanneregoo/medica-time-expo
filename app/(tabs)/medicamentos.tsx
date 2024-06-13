@@ -8,13 +8,13 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useEffect, useState } from 'react';
 // import {token} from '@/.env' //veriricar como podemos inportar o token doa rquivo .env
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { consultadados, token } from '../service';
 import { AddButton } from '@/components/button/AddButton';
 
 export default function Medicamentos() {
-
   const [listaMedicamentos, setListaMedicamentos] = useState([])
+  const router = useRouter()
   useEffect(
     () => {
       const fetchDados = async () => {
@@ -29,6 +29,9 @@ export default function Medicamentos() {
     // Mapear a matriz de pares para uma nova matriz de strings com o índice
     return medicamentos.map(([key, value], index) => `${value} `);
   }
+  const handleClick = () => {
+    router.push('/medicamento')
+  };
 
   return (
     <ParallaxScrollView>
@@ -50,7 +53,7 @@ export default function Medicamentos() {
         </>
       )) :
         <ThemedText type='defaultSemiBold' > Ainda não há medicamentos cadastrados</ThemedText>}
-      <AddButton text='Adicionar Medicamento'/>
+      <AddButton text='Adicionar Medicamento' onPress={handleClick}/>
     </ParallaxScrollView>
   );
 }

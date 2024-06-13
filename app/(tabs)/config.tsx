@@ -48,10 +48,10 @@ export default function TabTwoScreen() {
                 <ThemedText type="subtitle" style={styles.title}>Localizar Farmacias</ThemedText>
             </ThemedView>
             <ThemedView style={styles.tag}>
-                <Link href={'/'}>
-
-                <MaterialCommunityIcons name="exit-to-app" size={24} style={styles.icon} />
-                    <ThemedText type="subtitle" style={styles.title}>Sair</ThemedText> </Link>
+                <Link style={styles.link} href={'/'}>
+                    <MaterialCommunityIcons name="exit-to-app" size={24} style={styles.icon}/>
+                    <ThemedText type="subtitle" style={styles.sair}>Sair</ThemedText> 
+                    </Link>
             </ThemedView>
 
 
@@ -79,5 +79,18 @@ const styles = StyleSheet.create({
         color: '#001b1c',
         opacity: .9,
         paddingBottom: 20
+
+    }, 
+    sair:{
+        display:'flex',
+        justifyContent:'space-between',
+        color: '#001b1c',
+        paddingBottom: 200, 
+
+    }
+    ,link:{
+            display: 'flex',
+            flexDirection: 'row'
+    
     }
 });
