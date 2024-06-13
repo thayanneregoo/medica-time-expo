@@ -31,7 +31,7 @@ const LoginScreen = () => {
       return;
     }
     setEmailError('');
-    alert(`Email: ${email}, Password: ${password}`);
+    // alert(`Email: ${email}, Password: ${password}`);
     router.push('/alarme')
   };
 

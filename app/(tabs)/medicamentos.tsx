@@ -25,6 +25,7 @@ const questions = [
 export default function Medicamentos() {
   const [listaMedicamentos, setListaMedicamentos] = useState([])
   const [isModalVisible, setModalVisible] = useState(false);
+  const [atualizaPagina, setAtualizaPagina] = useState(false)
   const router = useRouter()
   useEffect(
     () => {
@@ -32,7 +33,12 @@ export default function Medicamentos() {
         setListaMedicamentos(await consultadados('Medicamentos/'))
       }
       fetchDados()
-    }, [])
+    }, [atualizaPagina])
+
+    const closeModal = () => {
+      setModalVisible(false);
+      setAtualizaPagina(prev => !prev)
+    }
   const mapeamento = (medicamento: object) => {
     // Converter o objeto em uma matriz de pares [key, value]
     const medicamentos = Object.entries(medicamento);
@@ -65,7 +71,7 @@ export default function Medicamentos() {
       )) :
         <ThemedText type='defaultSemiBold' > Ainda não há medicamentos cadastrados</ThemedText>}
       <AddButton text='Adicionar Medicamento' onPress={() => setModalVisible(true)} />
-      <StaticQuestionnaireModal   visible={isModalVisible} onClose={() => setModalVisible(false)} />
+      <StaticQuestionnaireModal   visible={isModalVisible} onClose={() => closeModal()} />
     </ParallaxScrollView>
   );
 }

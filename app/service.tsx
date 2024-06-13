@@ -3,11 +3,11 @@
 export const token = process.env.EXPO_PUBLIC_KEY
 export const url = process.env.EXPO_PUBLIC_API_URL
 
-export async function adicionaDados(data: any, tableName: string) {
+export async function adicionaDados(data: object, tableName: string) {
   try {
-    console.log('Iniciando conexão');
+    console.log('Iniciando conexão'); 
 
-    const response = await fetch(`https://api.airtable.com/v0/appNsRbWKK7L2FuqF/${tableName}/`, {
+    const response = await fetch(url +tableName, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -24,7 +24,6 @@ export async function adicionaDados(data: any, tableName: string) {
     }
 
     const responseData = await response.json();
-    console.log('Response data:', responseData);
 
     // Retorna a resposta convertida para JSON
     return responseData;
@@ -44,7 +43,6 @@ export async function adicionaDados(data: any, tableName: string) {
 
 export async function consultadados(pagina: string) {
   try {
-    console.log("acessando pagina")
     const data = await fetch(url + pagina, {
       method: "GET",
       headers: {
@@ -53,13 +51,29 @@ export async function consultadados(pagina: string) {
       }
     })
 
-    const result = await data.json();
-    console.log(result.records)
+    const result = await data.json()
     return result.records
-
-
   } catch (error) {
     console.log(error)
   }
 }
 
+export async function consultaAlarmesId() {
+  try {
+    const data = await fetch(url + 'Alarmes/', {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
+
+    const result = await data.json()
+
+   const alarmes = result.records.map((x:any)=>({id:x.id, nome:x.fields.Name}))
+   console.log('ALARMES:', alarmes)
+    return alarmes
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { ThemedText } from '../ThemedText';
 import MultiPicker from './multiplaescolha'; // Supondo que MultiPicker seja implementado corretamente
+import { adicionaDados, consultaAlarmesId } from '@/app/service';
 
 const options = ['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4'];
 
@@ -11,11 +12,17 @@ interface StaticQuestionnaireModalProps {
 }
 
 const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onClose, visible }) => {
+  const [alarmes,setAlarmes]=useState([])
   const [answers, setAnswers] = useState<{ [key: string]: any }>({});
   const [selectedHorarios, setSelectedHorarios] = useState<string[]>([]);
   const [isMultiPickerVisible, setMultiPickerVisible] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [frequency, setFrequency] = useState(1);
+  async function verAlarmes() {
+    setMultiPickerVisible(true)
+    const dados = await  consultaAlarmesId()
+    setAlarmes(dados)
+  }
 
   const incrementQuantity = () => {
     setQuantity(quantity + 1);
@@ -41,23 +48,22 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
     setAnswers({ ...answers, [id]: value });
   };
 
-  const generateHorarioId = (horarios: string[]) => {
-    return horarios.join('-').toLowerCase().replace(/ /g, '_');
-  };
+ 
 
   const handleSubmit = () => {
     const result = {
       fields: {
-        'horario id': generateHorarioId(selectedHorarios),
+        // 'horario id': '',
         'Quantidade': quantity,
-        'Frequência': frequency,
+        'Frequencia': frequency,
         'Notes': answers['notes'],
         'Name': answers['name'],
-        'Horario': selectedHorarios,
+        'horario id': selectedHorarios,
       },
     };
+    adicionaDados(result,'Medicamentos')
 
-    alert(`Result: ${JSON.stringify(result, null, 2)}`);
+    alert(`Result: ${JSON.stringify(result)}`);
     onClose();
   };
 
@@ -143,21 +149,16 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
 
             <View>
               <Text style={styles.label}>Alarmes:</Text>
-              <TouchableOpacity style={styles.input} onPress={() => setMultiPickerVisible(true)}>
+              <TouchableOpacity style={styles.input} onPress={() => verAlarmes()}>
                 <Text style={styles.dropdownText}>Selecione os horários dos alarmes</Text>
               </TouchableOpacity>
               <MultiPicker
-                options={options}
+                options={alarmes}
                 selectedOptions={selectedHorarios}
                 setSelectedOptions={setSelectedHorarios}
                 visible={isMultiPickerVisible}
                 onClose={() => setMultiPickerVisible(false)}
               />
-              <View >
-                {selectedHorarios.length > 0 && (
-                  <Text>Horários selecionados: {selectedHorarios.join(', ')}</Text>
-                )}
-              </View>
             </View>
           </ScrollView>
           <Button title="Submit" onPress={handleSubmit} />

@@ -1,10 +1,14 @@
-// components/MultiPicker.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet, ScrollView, Button } from 'react-native';
-import Checkbox from 'expo-checkbox';
+import Checkbox from 'expo-checkbox'; // Importando o componente Checkbox do Expo
+
+interface Alarme {
+  id: string;
+  nome: string;
+}
 
 interface MultiPickerProps {
-  options: string[];
+  options: Alarme[];
   selectedOptions: string[];
   setSelectedOptions: (options: string[]) => void;
   visible: boolean;
@@ -12,11 +16,11 @@ interface MultiPickerProps {
 }
 
 const MultiPicker: React.FC<MultiPickerProps> = ({ options, selectedOptions, setSelectedOptions, visible, onClose }) => {
-  const handleToggleOption = (option: string) => {
-    if (selectedOptions.includes(option)) {
-      setSelectedOptions(selectedOptions.filter(o => o !== option));
+  const handleToggleOption = (option: Alarme) => {
+    if (selectedOptions.includes(option.id)) {
+      setSelectedOptions(selectedOptions.filter((id) => id !== option.id));
     } else {
-      setSelectedOptions([...selectedOptions, option]);
+      setSelectedOptions([...selectedOptions, option.id]);
     }
   };
 
@@ -31,13 +35,20 @@ const MultiPicker: React.FC<MultiPickerProps> = ({ options, selectedOptions, set
         <View style={styles.modalContent}>
           <ScrollView>
             {options.map((option, index) => (
-              <View key={index} style={styles.optionContainer}>
-                <Checkbox
-                  value={selectedOptions.includes(option)}
-                  onValueChange={() => handleToggleOption(option)}
-                />
-                <Text style={styles.optionLabel}>{option}</Text>
-              </View>
+              <TouchableOpacity
+                key={index}
+                style={styles.optionContainer}
+                onPress={() => handleToggleOption(option)}
+              >
+                <View style={styles.checkboxContainer}>
+                  <Checkbox
+                    style={styles.checkbox}
+                    value={selectedOptions.includes(option.id)}
+                    onValueChange={() => handleToggleOption(option)}
+                  />
+                  <Text style={styles.optionLabel}>{option.nome}</Text>
+                </View>
+              </TouchableOpacity>
             ))}
           </ScrollView>
           <Button title="Close" onPress={onClose} />
@@ -62,12 +73,18 @@ const styles = StyleSheet.create({
     maxHeight: '80%',
   },
   optionContainer: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+  },
+  checkbox: {
+    marginRight: 10,
   },
   optionLabel: {
-    marginLeft: 10,
     fontSize: 16,
   },
 });
