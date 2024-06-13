@@ -14,7 +14,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
       }}>
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
@@ -22,7 +22,7 @@ export default function TabLayout() {
             <TabBarIcon name={focused ? 'home-outline' : 'home'} color={color} />
           ),
         }}
-      />
+      /> */}
       {/* <Tabs.Screen
         name="calendario"
         options={{
@@ -56,6 +56,15 @@ export default function TabLayout() {
           title: 'Notas',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'list' : 'list-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="config"
+        options={{
+          title: 'Configurações',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'add' : 'add-outline'} color={color} />
           ),
         }}
       />

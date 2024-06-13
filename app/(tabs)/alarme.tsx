@@ -65,7 +65,7 @@ export default function TabTwoScreen() {
          
               </>     
           )) }
-    <AddButton text='Adiconar alarme' />
+    <AddButton text='Adicionar alarme' />
 
   </ParallaxScrollView>
   );

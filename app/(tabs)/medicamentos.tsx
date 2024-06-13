@@ -50,7 +50,7 @@ export default function Medicamentos() {
         </>
       )) :
         <ThemedText type='defaultSemiBold' > Ainda não há medicamentos cadastrados</ThemedText>}
-      <AddButton />
+      <AddButton text='Adicionar Medicamento'/>
     </ParallaxScrollView>
   );
 }
