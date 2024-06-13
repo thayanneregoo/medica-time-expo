@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { ThemedText } from '../ThemedText';
-import MultiPicker from './multiplaescolha'; // Supondo que MultiPicker seja implementado corretamente
+import MultiPicker from '../modais/multiplaescolha'; // Supondo que MultiPicker seja implementado corretamente
 import { adicionaDados, consultaAlarmesId } from '@/app/service';
-import { AddButton } from '../button/AddButton';
 
 const options = ['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4'];
 
@@ -12,7 +11,7 @@ interface StaticQuestionnaireModalProps {
   visible: boolean;
 }
 
-const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onClose, visible }) => {
+const AlarmeModal: React.FC<StaticQuestionnaireModalProps> = ({ onClose, visible }) => {
   const [alarmes,setAlarmes]=useState([])
   const [answers, setAnswers] = useState<{ [key: string]: any }>({});
   const [selectedHorarios, setSelectedHorarios] = useState<string[]>([]);
@@ -162,7 +161,7 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
               />
             </View>
           </ScrollView>
-          <AddButton text={'Adicionar Medicamento'} onPress={handleSubmit} />
+          <Button title="Submit" onPress={handleSubmit} />
         </View>
       </View>
     </Modal>
@@ -273,4 +272,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default StaticQuestionnaireModal;
+export default AlarmeModal;

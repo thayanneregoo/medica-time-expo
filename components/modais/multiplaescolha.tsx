@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet, ScrollView, Button } from 'react-native';
 import Checkbox from 'expo-checkbox'; // Importando o componente Checkbox do Expo
+import { AddButton } from '../button/AddButton';
 
 interface Alarme {
   id: string;
@@ -51,7 +52,7 @@ const MultiPicker: React.FC<MultiPickerProps> = ({ options, selectedOptions, set
               </TouchableOpacity>
             ))}
           </ScrollView>
-          <Button title="Close" onPress={onClose} />
+          <AddButton text={'Adicionar horário'} onPress={onClose}/>
         </View>
       </View>
     </Modal>

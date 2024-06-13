@@ -13,7 +13,7 @@ import { consultadados, token } from '../service';
 import { AddButton } from '@/components/button/AddButton';
 import QuestionnaireModal from '@/components/helper/modal';
 import QuestionnaireModalDinamic from '@/components/helper/modaldinamica';
-import StaticQuestionnaireModal from '@/components/modais/modalmedicamentos';
+import StaticQuestionnaireModal from '@/components/modais/modalMedicamentos';
 
 const questions = [
   { id: 'quantidade', label: 'Quantidade', placeholder: 'Digite a quantidade' },
