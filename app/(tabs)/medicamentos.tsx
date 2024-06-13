@@ -11,9 +11,20 @@ import { useEffect, useState } from 'react';
 import { Link, useRouter } from 'expo-router';
 import { consultadados, token } from '../service';
 import { AddButton } from '@/components/button/AddButton';
+import QuestionnaireModal from '@/components/helper/modal';
+import QuestionnaireModalDinamic from '@/components/helper/modaldinamica';
+import StaticQuestionnaireModal from '@/components/modais/modalmedicamentos';
+
+const questions = [
+  { id: 'quantidade', label: 'Quantidade', placeholder: 'Digite a quantidade' },
+  { id: 'notes', label: 'Notes', placeholder: 'Digite a descrição' },
+  { id: 'name', label: 'Name', placeholder: 'Digite o nome do medicamento' },
+  { id: 'horario', label: 'Horário', placeholder: 'Escolha os horários' },  // Este campo será tratado como uma lista de opções no modal
+];
 
 export default function Medicamentos() {
   const [listaMedicamentos, setListaMedicamentos] = useState([])
+  const [isModalVisible, setModalVisible] = useState(false);
   const router = useRouter()
   useEffect(
     () => {
@@ -53,7 +64,8 @@ export default function Medicamentos() {
         </>
       )) :
         <ThemedText type='defaultSemiBold' > Ainda não há medicamentos cadastrados</ThemedText>}
-      <AddButton text='Adicionar Medicamento' onPress={handleClick}/>
+      <AddButton text='Adicionar Medicamento' onPress={() => setModalVisible(true)} />
+      <StaticQuestionnaireModal   visible={isModalVisible} onClose={() => setModalVisible(false)} />
     </ParallaxScrollView>
   );
 }

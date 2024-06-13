@@ -37,9 +37,10 @@ const FormularioMedicamento = () => {
 
   return (
     <ParallaxScrollView>
-      <ScrollView contentContainerStyle={styles.container}>
         <ThemedView style={styles.formContainer}>
-          <ThemedText>Adicionar Medicamento</ThemedText>
+          <ThemedText>Adicionarr Medicamento</ThemedText>
+          </ThemedView>
+          <ThemedView>
           <TextInput
             style={styles.input}
             placeholder="Nome do Medicamento"
@@ -79,7 +80,7 @@ const FormularioMedicamento = () => {
           </Picker> */}
           <Button title="Adicionar Medicamento" onPress={handleAdicionar} />
         </ThemedView>
-      </ScrollView>
+   
     </ParallaxScrollView>
   );
 };

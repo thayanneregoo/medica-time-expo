@@ -6,6 +6,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { AddButton } from '@/components/button/AddButton';
 import { Link, useRouter } from 'expo-router';
 import { ThemedText } from '@/components/ThemedText';
+import { ExternalLink } from '@/components/ExternalLink';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ const LoginScreen = () => {
 
   const router = useRouter()
 
-  const validateEmail = (email:string) => {
+  const validateEmail = (email: string) => {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
   };
@@ -26,8 +27,8 @@ const LoginScreen = () => {
       setEmailError('Por favor, insira um email válido.');
       return;
     } if (!password || password.length < 8) {
-    setPasswordError('Por favor, insira sua senha corretamente');
-    return;
+      setPasswordError('Por favor, insira sua senha corretamente');
+      return;
     }
     setEmailError('');
     alert(`Email: ${email}, Password: ${password}`);
@@ -37,11 +38,17 @@ const LoginScreen = () => {
 
   return (
     <ParallaxScrollView>
-    <ThemedView style={styles.titleContainer}>
+      <ThemedView style={styles.titleContainer}>
         <ThemedText type="title" style={styles.title}>Login</ThemedText>
+      </ThemedView>
+
+      <ThemedView>
+        {/* <Text style={styles.label}>Email</Text> */}
+        <ThemedText type="subtitle" >Email</ThemedText>
+
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="Digite seu email"
           keyboardType="email-address"
           value={email}
           onChangeText={(text) => {
@@ -50,19 +57,25 @@ const LoginScreen = () => {
           }}
           autoCapitalize="none"
         />
-      {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
+        {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
+        {/* <Text style={styles.label} >Senha</Text> */}
+        <ThemedText type="subtitle" >Senha</ThemedText>
+
 
         <TextInput
           style={styles.input}
-          placeholder="Senha"
+          placeholder="Digite sua senha"
           secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
         />
         {passwordError ? <Text style={styles.error}>{passwordError}</Text> : null}
-
+        <ExternalLink href="">
+           <ThemedText type="link" >Esqueci senha</ThemedText>
+         </ExternalLink>
       </ThemedView>
-      <AddButton text='Login' onPress={handleLogin} icon='none'/>
+
+      <AddButton text='Login' onPress={handleLogin} icon='none' />
 
 
     </ParallaxScrollView>
@@ -70,30 +83,33 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  label: {
+    fontSize:15,
+    paddingBottom:10,
+    fontWeight:'500',
+    color:'#00595f'
   },
   input: {
+    opacity:0.7,
     width: '100%',
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 5,
-    paddingLeft: 10,
+    padding: 10,
     marginBottom: 20,
-  },  titleContainer: {
+  }, titleContainer: {
     flexDirection: 'column',
-    alignItems:'center',
-    justifyContent:'center',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 8,
   }
-  ,title:
-  {paddingBottom:20}, error: {
-    color: 'red',
-    marginBottom: 10,
-  }
+  , title:
+    { paddingBottom: 10 }, error: {
+      color: 'red',
+      marginBottom: 10,
+
+    }
 });
 
 export default LoginScreen;
