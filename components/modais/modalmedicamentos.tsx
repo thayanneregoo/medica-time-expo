@@ -64,7 +64,6 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
     };
     adicionaDados(result,'Medicamentos')
 
-    alert(`Result: ${JSON.stringify(result)}`);
     onClose();
   };
 

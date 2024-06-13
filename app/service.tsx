@@ -77,3 +77,21 @@ export async function consultaAlarmesId() {
     console.log(error)
   }
 }
+export async function deletadados(pagina: string, id:string) {
+  try {
+    const endpoint = `${url}${pagina}/${id}`
+    const data = await fetch(endpoint, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(id),
+    })
+
+    const result = await data.json()
+    return result.records
+  } catch (error) {
+    console.log(error)
+  }
+}
