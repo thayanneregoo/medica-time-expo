@@ -9,7 +9,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { consultadados, token } from '../service';
 import { useEffect, useState } from 'react';
 import { formatDatetime } from '@/components/helper/formatdata';
-import { AddButton } from '@/components/AddButton';
+import { AddButton } from '@/components/button/AddButton';
 
 export default function TabTwoScreen() {
     const [notas,setNotas] = useState([])
@@ -17,7 +17,7 @@ export default function TabTwoScreen() {
       ()=>{
         const fetchDados = async () => {
           try {
-            const data = await consultadados('Medicamentos/');
+            const data = await consultadados('Anotações/');
             setNotas(data);
           } catch (error) {
             console.error('Error fetching data:', error);
@@ -50,7 +50,7 @@ export default function TabTwoScreen() {
                 </>     
             )) }
 
-<AddButton/>
+<AddButton text='Adicionar anotações'/>
 
   
       

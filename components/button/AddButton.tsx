@@ -1,26 +1,22 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { TabBarIcon } from "./navigation/TabBarIcon";
+import { TabBarIcon } from "../navigation/TabBarIcon";
 import { usePathname } from "expo-router";
 
 interface AddButtonProps {
-    // text?: string;
+    text: string;
     onPress?: () => void; //aqui deve ser adicionado uma função que abre a modal
   }  
 
   
-  export const AddButton: React.FC<AddButtonProps> = ({onPress }) => {
+  export const AddButton: React.FC<AddButtonProps> = ({onPress, text }) => {
 
-    const pathname = usePathname()
-    const formaPathName = (pathname:string)=>{
-        const name = pathname.substring(1)
-        const nameformated = name.charAt(0).toUpperCase() + name.slice(1)
-        return nameformated
-    }
+    
+  
 
 return(
     <>
     <TouchableOpacity style={styles.button}  onPress={onPress} >
-<Text style={styles.buttonText}>Adicionar {formaPathName(pathname)}  </Text>
+<Text style={styles.buttonText}>{text}</Text>
 <TabBarIcon name={'add'} style={styles.icon}/>
 
 </TouchableOpacity> 

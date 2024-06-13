@@ -6,7 +6,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useEffect, useState } from 'react';
-import { consultadados, token } from '../service';
+import { consultadados,  token } from '../service';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { AddButton } from '@/components/button/AddButton';
 import { usePathname } from 'expo-router';
@@ -19,7 +19,7 @@ export default function TabTwoScreen() {
     ()=>{
       const fetchDados = async () => {
         try {
-          const data = await consultadados('Alarmes/');
+          const data = await consultadados(`$`);
           setHorarios(data);
           console.log(horarios)
         } catch (error) {
@@ -65,7 +65,7 @@ export default function TabTwoScreen() {
          
               </>     
           )) }
-    <AddButton text='Adiconar alarme' />
+    <AddButton text='dsd' />
 
   </ParallaxScrollView>
   );

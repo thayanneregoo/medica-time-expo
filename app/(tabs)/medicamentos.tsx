@@ -10,46 +10,47 @@ import { useEffect, useState } from 'react';
 // import {token} from '@/.env' //veriricar como podemos inportar o token doa rquivo .env
 import { Link } from 'expo-router';
 import { consultadados, token } from '../service';
-import { AddButton } from '@/components/AddButton';
+import { AddButton } from '@/components/button/AddButton';
 
 export default function Medicamentos() {
 
-    const [listaMedicamentos,setListaMedicamentos]= useState([])
-    useEffect ( 
-       ()=>{
-        const fetchDados = async ()=>{
-          setListaMedicamentos(await consultadados('Medicamentos/'))
-        }
-        fetchDados()
-     },[])
-     const mapeamento = (medicamento:object) => {
-      // Converter o objeto em uma matriz de pares [key, value]
-      const medicamentos = Object.entries(medicamento);
-    
-      // Mapear a matriz de pares para uma nova matriz de strings com o índice
-      return medicamentos.map(([key, value], index) => `${value} `);
-    }
+  const [listaMedicamentos, setListaMedicamentos] = useState([])
+  useEffect(
+    () => {
+      const fetchDados = async () => {
+        setListaMedicamentos(await consultadados('Medicamentos/'))
+      }
+      fetchDados()
+    }, [])
+  const mapeamento = (medicamento: object) => {
+    // Converter o objeto em uma matriz de pares [key, value]
+    const medicamentos = Object.entries(medicamento);
+
+    // Mapear a matriz de pares para uma nova matriz de strings com o índice
+    return medicamentos.map(([key, value], index) => `${value} `);
+  }
 
   return (
     <ParallaxScrollView>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Meus Medicamentos</ThemedText>
       </ThemedView>
-      
-            { listaMedicamentos.map((tema:any,index)=> (
-                <>
-                <ThemedView style={styles.titleContainer} key={index}>
-                  <Collapsible title={tema.fields.Name}>    
-                  <ThemedText type="defaultSemiBold" >Descrição do Medicamento</ThemedText> 
-
-                  <ThemedText>{tema.fields.Notes ? tema.fields.Notes:'Ainda não há descrição'}{' '}</ThemedText>
-                  <ThemedText >Horarios: {mapeamento(tema.fields.Horario)}{' '}</ThemedText>   
-                  <ThemedText >Quantidade por horario :{tema.fields.Quantidade}{' '}</ThemedText>              
-                  </Collapsible> 
-                </ThemedView>
-                </>     
-            )) }
-      <AddButton/>
+      {listaMedicamentos ? listaMedicamentos.map((tema: any, index) => (
+        <>
+          <ThemedView style={styles.titleContainer} key={index}>
+            <Collapsible title={tema.fields.Name}>
+              <ThemedText type="defaultSemiBold" >Descrição do Medicamento</ThemedText>
+              <ThemedText>{tema.fields.Notes ? tema.fields.Notes : 'Ainda não há descrição'}{' '}</ThemedText>
+              <ThemedText >Horarios: {tema.fields.Horario? mapeamento(tema.fields.Horario): 
+                <ThemedText>Ainda não há horarios definidos</ThemedText>}{' '}</ThemedText>
+              <ThemedText >Quantidade por horario: {tema.fields.Quantidade ? tema.fields.Quantidade : 
+            <ThemedText>Ainda não há quantidade definida</ThemedText>}{' '}</ThemedText>
+            </Collapsible>
+          </ThemedView>
+        </>
+      )) :
+        <ThemedText type='defaultSemiBold' > Ainda não há medicamentos cadastrados</ThemedText>}
+      <AddButton />
     </ParallaxScrollView>
   );
 }

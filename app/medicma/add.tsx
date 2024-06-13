@@ -1,3 +1,4 @@
+import { Formulario } from "@/components/formulario";
 import { adicionaDados, token } from "../service";
 
 const datanovo =  {"fields":{
@@ -8,6 +9,7 @@ const datanovo =  {"fields":{
       "reccxVNriUlUscn69"
     ]
   }}
+  const dados = ['nome','data','quantidade']
 
 export default function Add(){
       

@@ -9,6 +9,7 @@ import Animated, {
 
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from './ThemedText';
+import { Link } from 'expo-router';
 
 
 const HEADER_HEIGHT = 250;
@@ -44,7 +45,10 @@ export default function ParallaxScrollView({children}: Props) { //tentar entende
             styles.header,
             headerAnimatedStyle
           ]}>
-          <Image source={require('@/assets/images/medica-time33.png')} style={{ alignSelf: 'flex-start' }}/>
+            <Link href={'/'}>
+            <Image source={require('@/assets/images/medica-time33.png')} style={{ alignSelf: 'flex-start' }}/>
+            </Link>
+          
         
         </Animated.View>
         
