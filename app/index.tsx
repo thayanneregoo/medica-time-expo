@@ -10,13 +10,30 @@ import { ThemedText } from '@/components/ThemedText';
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+
   const router = useRouter()
-  
+
+  const validateEmail = (email:string) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
 
   const handleLogin = () => {
+    if (!validateEmail(email)) {
+      setEmailError('Por favor, insira um email válido.');
+      return;
+    } if (!password || password.length < 8) {
+    setPasswordError('Por favor, insira sua senha corretamente');
+    return;
+    }
+    setEmailError('');
     alert(`Email: ${email}, Password: ${password}`);
     router.push('/alarme')
   };
+
 
   return (
     <ParallaxScrollView>
@@ -27,9 +44,13 @@ const LoginScreen = () => {
           placeholder="Email"
           keyboardType="email-address"
           value={email}
-          onChangeText={setEmail}
+          onChangeText={(text) => {
+            setEmail(text);
+            if (emailError) setEmailError(''); // Limpar mensagem de erro ao digitar
+          }}
+          autoCapitalize="none"
         />
-
+      {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
 
         <TextInput
           style={styles.input}
@@ -38,6 +59,7 @@ const LoginScreen = () => {
           value={password}
           onChangeText={setPassword}
         />
+        {passwordError ? <Text style={styles.error}>{passwordError}</Text> : null}
 
       </ThemedView>
       <AddButton text='Login' onPress={handleLogin} icon='none'/>
@@ -68,7 +90,10 @@ const styles = StyleSheet.create({
     gap: 8,
   }
   ,title:
-  {paddingBottom:20}
+  {paddingBottom:20}, error: {
+    color: 'red',
+    marginBottom: 10,
+  }
 });
 
 export default LoginScreen;
