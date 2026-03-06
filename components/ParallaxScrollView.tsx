@@ -1,5 +1,5 @@
-import type { PropsWithChildren, ReactElement } from 'react';
-import { ImageBackground, StyleSheet, useColorScheme } from 'react-native';
+import type { PropsWithChildren } from 'react';
+import { StyleSheet, Image } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedRef,
@@ -8,7 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { ThemedView } from '@/components/ThemedView';
-import { ThemedText } from './ThemedText';
+
 
 
 const HEADER_HEIGHT = 250;
@@ -44,11 +44,7 @@ export default function ParallaxScrollView({children}: Props) { //tentar entende
             styles.header,
             headerAnimatedStyle
           ]}>
-          <ThemedText style={styles.logotext}>MEDICA TIME</ThemedText>
-
-
-        {/* <img src='./assets/images/medica-time3.png' height={100} /> */}
-        
+            <Image source={require('@/assets/images/medica-time33.png')} style={{ alignSelf: 'flex-start' }}/>          
         </Animated.View>
         
         <ThemedView style={styles.content}>{children}</ThemedView>

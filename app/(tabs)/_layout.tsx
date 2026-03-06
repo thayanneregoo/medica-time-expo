@@ -5,6 +5,8 @@ import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
+
+
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
@@ -14,7 +16,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
       }}>
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
@@ -22,8 +24,8 @@ export default function TabLayout() {
             <TabBarIcon name={focused ? 'home-outline' : 'home'} color={color} />
           ),
         }}
-      />
-      <Tabs.Screen
+      /> */}
+      {/* <Tabs.Screen
         name="calendario"
         options={{
           title: 'Calendario',
@@ -31,7 +33,7 @@ export default function TabLayout() {
             <TabBarIcon name={focused ? 'calendar' : 'calendar-outline'} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="alarme"
         options={{
@@ -44,7 +46,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="medicamentos"
         options={{
-          title: 'medicamentos',
+          title: 'Medicamentos',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'medkit' : 'medkit-outline'} color={color} />
           ),
@@ -56,6 +58,16 @@ export default function TabLayout() {
           title: 'Notas',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'list' : 'list-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="config"
+        options={{
+          title: 'Configurações',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'settings' : 'settings-outline'} color={color} />
+            
           ),
         }}
       />
