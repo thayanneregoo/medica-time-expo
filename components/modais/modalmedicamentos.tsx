@@ -1,28 +1,40 @@
-import React, { useState } from 'react';
-import { Modal, View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { ThemedText } from '../ThemedText';
-import MultiPicker from './multiplaescolha'; // Supondo que MultiPicker seja implementado corretamente
-import { adicionaDados, consultaAlarmesId } from '@/app/service';
-import { AddButton } from '../button/AddButton';
+import React, { useState } from "react";
+import {
+  Modal,
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { ThemedText } from "../ThemedText";
+import MultiPicker from "./MultiplaEscolha"; // Supondo que MultiPicker seja implementado corretamente
+import { adicionaDados, consultaAlarmesId } from "@/app/service";
+import { AddButton } from "../button/AddButton";
 
-const options = ['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4'];
+const options = ["Opção 1", "Opção 2", "Opção 3", "Opção 4"];
 
 interface StaticQuestionnaireModalProps {
   onClose: () => void;
   visible: boolean;
 }
 
-const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onClose, visible }) => {
-  const [alarmes,setAlarmes]=useState([])
+const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({
+  onClose,
+  visible,
+}) => {
+  const [alarmes, setAlarmes] = useState([]);
   const [answers, setAnswers] = useState<{ [key: string]: any }>({});
   const [selectedHorarios, setSelectedHorarios] = useState<string[]>([]);
   const [isMultiPickerVisible, setMultiPickerVisible] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [frequency, setFrequency] = useState(1);
   async function verAlarmes() {
-    setMultiPickerVisible(true)
-    const dados = await  consultaAlarmesId()
-    setAlarmes(dados)
+    setMultiPickerVisible(true);
+    const dados = await consultaAlarmesId();
+    setAlarmes(dados);
   }
 
   const incrementQuantity = () => {
@@ -49,20 +61,18 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
     setAnswers({ ...answers, [id]: value });
   };
 
- 
-
   const handleSubmit = () => {
     const result = {
       fields: {
         // 'horario id': '',
-        'Quantidade': quantity,
-        'Frequencia': frequency,
-        'Notes': answers['notes'],
-        'Name': answers['name'],
-        'horario id': selectedHorarios,
+        Quantidade: quantity,
+        Frequencia: frequency,
+        Notes: answers["notes"],
+        Name: answers["name"],
+        "horario id": selectedHorarios,
       },
     };
-    adicionaDados(result,'Medicamentos')
+    adicionaDados(result, "Medicamentos");
 
     onClose();
   };
@@ -89,8 +99,8 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
               <TextInput
                 style={styles.input}
                 placeholder="Digite o nome do Medicamento"
-                value={answers['name'] || ''}
-                onChangeText={(text) => handleInputChange('name', text)}
+                value={answers["name"] || ""}
+                onChangeText={(text) => handleInputChange("name", text)}
               />
             </View>
             <View>
@@ -98,14 +108,17 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
               <TextInput
                 style={styles.input}
                 placeholder="Digite suas anotações"
-                value={answers['notes'] || ''}
-                onChangeText={(text) => handleInputChange('notes', text)}
+                value={answers["notes"] || ""}
+                onChangeText={(text) => handleInputChange("notes", text)}
               />
             </View>
-            <View >
+            <View>
               <Text style={styles.label}>Quantidade:</Text>
               <View style={styles.inputContainer}>
-                <TouchableOpacity style={styles.button} onPress={decrementQuantity}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={decrementQuantity}
+                >
                   <Text style={styles.buttonText}>-</Text>
                 </TouchableOpacity>
                 <TextInput
@@ -119,15 +132,21 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
                     }
                   }}
                 />
-                <TouchableOpacity style={styles.button} onPress={incrementQuantity}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={incrementQuantity}
+                >
                   <Text style={styles.buttonText}>+</Text>
                 </TouchableOpacity>
               </View>
             </View>
-            <View >
+            <View>
               <Text style={styles.label}>Frequência:</Text>
               <View style={styles.inputContainer}>
-                <TouchableOpacity style={styles.button} onPress={decrementFrequency}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={decrementFrequency}
+                >
                   <Text style={styles.buttonText}>-</Text>
                 </TouchableOpacity>
                 <TextInput
@@ -141,7 +160,10 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
                     }
                   }}
                 />
-                <TouchableOpacity style={styles.button} onPress={incrementFrequency}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={incrementFrequency}
+                >
                   <Text style={styles.buttonText}>+</Text>
                 </TouchableOpacity>
               </View>
@@ -149,8 +171,13 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
 
             <View>
               <Text style={styles.label}>Alarmes:</Text>
-              <TouchableOpacity style={styles.input} onPress={() => verAlarmes()}>
-                <Text style={styles.dropdownText}>Selecione os horários dos alarmes</Text>
+              <TouchableOpacity
+                style={styles.input}
+                onPress={() => verAlarmes()}
+              >
+                <Text style={styles.dropdownText}>
+                  Selecione os horários dos alarmes
+                </Text>
               </TouchableOpacity>
               <MultiPicker
                 options={alarmes}
@@ -161,7 +188,7 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
               />
             </View>
           </ScrollView>
-          <AddButton text={'Adicionar Medicamento'} onPress={handleSubmit} />
+          <AddButton text={"Adicionar Medicamento"} onPress={handleSubmit} />
         </View>
       </View>
     </Modal>
@@ -171,65 +198,64 @@ const StaticQuestionnaireModal: React.FC<StaticQuestionnaireModalProps> = ({ onC
 const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
-    width: '80%',
+    width: "80%",
     padding: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 10,
-    maxHeight: '90%',
+    maxHeight: "90%",
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'baseline',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "baseline",
   },
   buttonClose: {
-    height: '80%',
+    height: "80%",
     padding: 5,
     paddingHorizontal: 10,
     paddingBottom: 5,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     borderRadius: 5,
-    backgroundColor: '#00595f',
+    backgroundColor: "#00595f",
   },
   textClose: {
     fontSize: 15,
-    fontWeight: 'bold',
-    color: 'white',
+    fontWeight: "bold",
+    color: "white",
   },
   title: {
     marginBottom: 20,
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   label: {
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     marginBottom: 5,
     marginLeft: 10,
     fontSize: 16,
   },
   input: {
-    width: '100%',
+    width: "100%",
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 20,
   },
-  
-  
+
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 10,
@@ -239,37 +265,37 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     fontSize: 16,
-    textAlign: 'center',
-    borderColor: 'gray',
+    textAlign: "center",
+    borderColor: "gray",
   },
   button: {
     padding: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   dropdownText: {
     height: "100%",
     width: "100%",
-    color: 'black',
-   
-    alignContent: 'center',
+    color: "black",
+
+    alignContent: "center",
     opacity: 0.7,
     padding: 10,
   },
-  dropdownContainer:{
-    width: '100%',
+  dropdownContainer: {
+    width: "100%",
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 20,
-    backgroundColor: '#80808036',
-  }
+    backgroundColor: "#80808036",
+  },
 });
 
 export default StaticQuestionnaireModal;

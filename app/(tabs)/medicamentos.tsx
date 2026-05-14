@@ -13,7 +13,7 @@ import { consultadados, deletadados, token } from '../service';
 import { AddButton } from '@/components/button/AddButton';
 import QuestionnaireModal from '@/components/helper/modal';
 import QuestionnaireModalDinamic from '@/components/helper/modaldinamica';
-import StaticQuestionnaireModal from '@/components/modais/modalMedicamentos';
+import StaticQuestionnaireModal from '@/components/modais/ModalMedicamentos';
 import Entypo from '@expo/vector-icons/Entypo';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 
